@@ -5,21 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "shopify": "node server.js",
+    "build": "next build --output public",
+    "start": "NODE_ENV=production node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@shopify/koa-shopify-auth": "^4.1.4",
-    "dotenv": "^10.0.0",
-    "isomorphic-fetch": "^3.0.0",
-    "koa": "^2.13.4",
-    "koa-session": "^6.2.0",
-    "next": "^12.0.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@shopify/koa-shopify-auth": "^3.2.0",
+    "@shopify/koa-shopify-graphql-proxy": "3.2.1",
+    "@shopify/shopify-api": "^2.0.0",
+    "@zeit/next-css": "^1.0.1",
+    "dotenv": "8.1.0",
+    "graphql": "14.5.8",
+    "isomorphic-fetch": "^2.2.1",
+    "js-cookie": "^2.2.1",
+    "koa": "^2.8.1",
+    "koa-router": "^10.1.1",
+    "koa-session": "^5.12.2",
+    "next": "^9.0.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }
