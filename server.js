@@ -27,7 +27,7 @@ app.prepare().then(() => {
           apiKey: SHOPIFY_API_KEY,
           secret: SHOPIFY_API_SECRET_KEY,
           scopes: ['read_products', 'write_products', 'read_orders, write_orders', 'read_draft_orders', 'write_draft_orders'],
-          prefix: '/shopify',
+        //   prefix: '/shopify',
           afterAuth(ctx) {
             const { shop, accessToken } = ctx.session;
             ctx.cookies.set('shopOrigin', shop, {
@@ -49,7 +49,7 @@ app.prepare().then(() => {
     console.log("SCOPE:" + server.scopes);
 
     server.use(verifyRequest({
-      authRoute: '/shopify/auth',
+    //   authRoute: '/shopify/auth',
     }));
     server.use(async (ctx) => {
       await handle(ctx.req, ctx.res);
