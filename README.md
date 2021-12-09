@@ -40,4 +40,4 @@ then don't forget to update url on the Shopify website, and `.env` file
 
 ### 5. Webhook
 
-Next step, [test a Shopify webhook](webhook)!
+Next step, [test a Shopify webhook](webhook.md)!
