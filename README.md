@@ -37,3 +37,7 @@ then don't forget to update url on the Shopify website, and `.env` file
 ![screenshot](/token.png)
 
 ![screenshot](/access-token.png)
+
+### 5. Webhook
+
+Next step, [test a Shopify webhook](webhook)!

@@ -25,63 +25,72 @@ const router = new KoaRouter();
 
 var products = [];
 
-router.get('/api/products', async (ctx) => {
+router.get("/api/products", async (ctx) => {
   try {
     ctx.body = {
-      status: 'success',
-      data: products
-    }
+      status: "success",
+      data: products,
+    };
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
+
+router.post("/api/order_updates", async (ctx) => {
+  console.log(ctx.request);
+
+  try {
+    ctx.body = {
+      status: "success",
+      request: ctx.request,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // Router Middleware
 server.use(router.allowedMethods());
 server.use(router.routes());
 
 app.prepare().then(() => {
-
-
-  server.use(session({ sameSite: 'none', secure: true }, server));
+  server.use(session({ sameSite: "none", secure: true }, server));
   server.keys = [SHOPIFY_API_SECRET_KEY];
 
   server.use(
     createShopifyAuth({
-      accessMode: 'offline', //by default, it's online
+      accessMode: "offline", // by default, it's online
       apiKey: SHOPIFY_API_KEY,
       secret: SHOPIFY_API_SECRET_KEY,
       scopes: [
-        'read_products',
-        'write_products',
-        'read_script_tags',
-        'write_script_tags',
-        'read_orders',
-        'write_orders',
+        "read_products",
+        "write_products",
+        "read_script_tags",
+        "write_script_tags",
+        "read_orders",
+        "write_orders",
       ],
       afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
-        ctx.cookies.set('shopOrigin', shop, {
+        ctx.cookies.set("shopOrigin", shop, {
           httpOnly: false,
           secure: true,
-          sameSite: 'none'
+          sameSite: "none",
         });
 
         ctx.cookies.set("shopify_access_token", accessToken, {
           httpOnly: false,
           secure: true,
-          sameSite: "none"
+          sameSite: "none",
         });
 
-        ctx.redirect('/');
+        ctx.redirect("/");
       },
-    }),
+    })
   );
 
-  server.use(graphQLProxy({ version: ApiVersion.October19 }))
+  server.use(graphQLProxy({ version: ApiVersion.October19 }));
   server.use(verifyRequest());
-
-
 
   server.use(async (ctx) => {
     await handle(ctx.req, ctx.res);
@@ -92,5 +101,4 @@ app.prepare().then(() => {
   server.listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`);
   });
-
 });
